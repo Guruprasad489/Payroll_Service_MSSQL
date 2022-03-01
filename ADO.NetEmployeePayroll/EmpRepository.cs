@@ -74,7 +74,6 @@ namespace ADO.NetEmployeePayroll
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
             finally

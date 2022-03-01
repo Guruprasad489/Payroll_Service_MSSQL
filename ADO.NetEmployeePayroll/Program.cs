@@ -18,7 +18,7 @@ namespace ADO.NetEmployeePayroll
             {
                 try
                 {
-                    Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Check Connection \n2.Add Data to Table ");
+                    Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table ");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
