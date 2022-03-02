@@ -19,7 +19,7 @@ namespace ADO.NetEmployeePayroll
                 try
                 {
                     Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table \n3.Update Employee \n4.Delete Employee" +
-                                      "\n5.Retrieve employees joined in a particular date range");
+                                      "\n5.Retrieve employees joined in a particular date range \n6.Find Sum, Average, min, max, count of salary by gender");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
@@ -70,6 +70,18 @@ namespace ADO.NetEmployeePayroll
                         case 5:
                             string query = "select * from employee_payroll where StartDate between cast ('2018-01-01' as date) and GETDATE()";
                             empRepository.GetAllEmployeesWithDataAdapter(query);
+                            break;
+                        case 6:
+                            string sumquery = "select sum(Salary) as sumsalary,Gender from employee_payroll group by Gender";
+                            string avgquery = "select avg(Salary) as avgsalary,Gender from employee_payroll group by Gender";
+                            string maxquery = "select max(Salary) as maxsalary,Gender from employee_payroll group by Gender";
+                            string minquery = "select min(Salary) as minsalary,Gender from employee_payroll group by Gender";
+                            string countquery = "select count(Name) as EmployeeCount,Gender from employee_payroll group by Gender";
+                            empRepository.GetAllEmployeesWithDataAdapter(sumquery);
+                            empRepository.GetAllEmployeesWithDataAdapter(avgquery);
+                            empRepository.GetAllEmployeesWithDataAdapter(maxquery);
+                            empRepository.GetAllEmployeesWithDataAdapter(minquery);
+                            empRepository.GetAllEmployeesWithDataAdapter(countquery);
                             break;
                         default:
                             Console.WriteLine("Please Enter Correct option");
