@@ -18,7 +18,8 @@ namespace ADO.NetEmployeePayroll
             {
                 try
                 {
-                    Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table \n3.Update Employee \n4.Delete Employee");
+                    Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table \n3.Update Employee \n4.Delete Employee" +
+                                      "\n5.Retrieve employees joined in a particular date range");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
@@ -27,8 +28,6 @@ namespace ADO.NetEmployeePayroll
                             break;
                         case 1:
                             empRepository.GetAllEmployees();
-                            Console.WriteLine("\nGet all employees with data adapter :");
-                            empRepository.GetAllEmployeesWithDataAdapter();
                             break;
                         case 2:
                             EmployeeModel obj = new EmployeeModel
@@ -67,6 +66,10 @@ namespace ADO.NetEmployeePayroll
                             Console.WriteLine("Enter new name");
                             model1.Name = Console.ReadLine();
                             empRepository.DeleteEmployee(model1);
+                            break;
+                        case 5:
+                            string query = "select * from employee_payroll where StartDate between cast ('2018-01-01' as date) and GETDATE()";
+                            empRepository.GetAllEmployeesWithDataAdapter(query);
                             break;
                         default:
                             Console.WriteLine("Please Enter Correct option");

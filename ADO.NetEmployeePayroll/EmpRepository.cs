@@ -56,7 +56,9 @@ namespace ADO.NetEmployeePayroll
             //    connection.Close();
             //}
         }
-        public void GetAllEmployeesWithDataAdapter()
+
+        //UC 5 - Method to retrieve all employees from particular date range 
+        public void GetAllEmployeesWithDataAdapter(string query)
         {
             try
             {
@@ -64,7 +66,7 @@ namespace ADO.NetEmployeePayroll
                 using (connection = new SqlConnection(connectionstring))
                 {
                     connection.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter("select * from Employee_Payroll", connection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
                     adapter.Fill(dataSet);
                     foreach (DataRow dataRow in dataSet.Tables[0].Rows)
                     {
@@ -196,5 +198,7 @@ namespace ADO.NetEmployeePayroll
                 connection.Close();
             }
         }
+
+
     }
 }
