@@ -64,3 +64,23 @@ insert into employee_payroll (Name, Salary, StartDate, Gender, Phone, Address, D
 					  values ('Virat', 60000.00, '2011-05-05', 'M', 7894561230, 'Bangalore', 'RCB', 60000.00, 1000.00, 2000.00, 1500.00);
 update employee_payroll set Net_Pay = (Basic_Pay-Deductions-Taxable_Pay-Income_Tax);
 
+--ER diagram--
+
+create table Department
+(
+Dept_Id int foreign key references employee_payroll(Id),
+Department varchar(100)
+);
+
+create table Employee_Address
+(
+Id int primary key,
+Current_Address varchar(100),
+Permanent_Addres varchar(100) 
+);
+
+alter table Employee_Address add foreign key (Id) references employee_payroll(Id);
+
+select * from employee_payroll;
+select * from Department;
+select * from Employee_Address;

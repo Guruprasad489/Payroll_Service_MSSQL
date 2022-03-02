@@ -29,7 +29,7 @@ namespace ADO.NetEmployeePayroll
                             model.Salary = Convert.ToDouble(reader["Salary"] == DBNull.Value ? default : reader["Salary"]);
                             model.Startdate = (DateTime)(reader["Startdate"] == DBNull.Value ? default : reader["Startdate"]);
                             model.Gender = Convert.ToChar(reader["Gender"] == DBNull.Value ? default : reader["Gender"]);
-                            model.Phone = Convert.ToInt32(reader["Phone"] == DBNull.Value ? default : reader["Phone"]);
+                            model.Phone = Convert.ToInt64(reader["Phone"] == DBNull.Value ? default : reader["Phone"]);
                             model.Address = Convert.ToString(reader["Address"] == DBNull.Value ? default : reader["Address"]);
                             model.Department = Convert.ToString(reader["Department"] == DBNull.Value ? default : reader["Department"]);
                             model.Basic_Pay = Convert.ToDouble(reader["Basic_Pay"] == DBNull.Value ? default : reader["Basic_Pay"]);
@@ -157,6 +157,39 @@ namespace ADO.NetEmployeePayroll
             {
                 Console.WriteLine(e.Message);
                 return default;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        //Method To Delete Employee details    
+        public void DeleteEmployee(EmployeeModel obj)
+        {
+            try
+            {
+                connection = new SqlConnection(connectionstring);
+                SqlCommand command = new SqlCommand("spDeleteEmployee", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.Parameters.AddWithValue("@Id", obj.Id);
+                command.Parameters.AddWithValue("@Name", obj.Name);
+                connection.Open();
+                var result = command.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    Console.WriteLine("Employee details deleted successfully");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to deleted employee details");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
             finally
             {

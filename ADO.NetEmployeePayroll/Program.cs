@@ -18,7 +18,7 @@ namespace ADO.NetEmployeePayroll
             {
                 try
                 {
-                    Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table \n3.Update Employee");
+                    Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table \n3.Update Employee \n4.Delete Employee");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
@@ -38,7 +38,7 @@ namespace ADO.NetEmployeePayroll
                                 Startdate = DateTime.Now,
                                 Gender = 'M',
                                 Phone = 912423,
-                                Department = "Account",
+                                Department = "RCB",
                                 Address = "Bangalore",
                                 Basic_Pay = 5000.00,
                                 Deductions = 1000.00,
@@ -59,6 +59,14 @@ namespace ADO.NetEmployeePayroll
                             model.Salary = Convert.ToDouble(Console.ReadLine());
                             var result = empRepository.UpdateEmployee(model);
                             Console.WriteLine("Id: " +result.Id+ ", Name: " +result.Name+ " has updated with Salary: " +result.Salary);
+                            break;
+                        case 4:
+                            EmployeeModel model1 = new EmployeeModel();
+                            Console.WriteLine("Enter id of employee whose data you want to update");
+                            model1.Id = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Enter new name");
+                            model1.Name = Console.ReadLine();
+                            empRepository.DeleteEmployee(model1);
                             break;
                         default:
                             Console.WriteLine("Please Enter Correct option");

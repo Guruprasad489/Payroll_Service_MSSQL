@@ -51,3 +51,22 @@ ERROR_PROCEDURE() AS ErrorProcedure,
 ERROR_LINE() AS ErrorLine,
 ERROR_MESSAGE() AS ErrorMessage;
 END CATCH
+
+--Delete employee details from the database--
+create procedure spDeleteEmployee
+(
+@Id int,
+@Name varchar(100)
+)
+as
+BEGIN TRY
+	delete from employee_payroll where Id = @Id and Name = @Name;
+END TRY
+BEGIN CATCH
+SELECT
+ERROR_NUMBER() AS ErrorNumber,
+ERROR_STATE() AS ErrorState,
+ERROR_PROCEDURE() AS ErrorProcedure,
+ERROR_LINE() AS ErrorLine,
+ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
