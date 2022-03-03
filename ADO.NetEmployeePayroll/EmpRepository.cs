@@ -84,7 +84,7 @@ namespace ADO.NetEmployeePayroll
             }
         }
 
-        //UC7 Method To Add Employee details    
+        //UC7- Method To Add Employee details    
         public void AddEmployee(EmployeeModel obj)
         {
             try
@@ -199,5 +199,41 @@ namespace ADO.NetEmployeePayroll
             }
         }
 
+        //UC8 - Insert details Into Two Tables
+        public void InsertIntoTwoTables(EmployeeModel obj)
+        {
+            try
+            {
+                connection = new SqlConnection(connectionstring);
+                connection.Open();
+                SqlCommand command = new SqlCommand("spInsertIntoTwoTables", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                command.Parameters.AddWithValue("@Name", obj.Name);
+                command.Parameters.AddWithValue("@Gender", obj.Gender);
+                command.Parameters.AddWithValue("@Address", obj.Address);
+                command.Parameters.Add("Id", SqlDbType.Int).Direction = ParameterDirection.Output;
+                var result = command.ExecuteScalar();
+                string id = command.Parameters["Id"].Value.ToString();
+                int newId = Convert.ToInt32(id);
+
+                string query = $"Insert into Payroll_Details(EmpId, Salary) values({newId},7894)";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                int res = cmd.ExecuteNonQuery();
+                if (res != 0)
+                {
+                    Console.WriteLine("Inserted into salary table successfully");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to insert into salary table");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

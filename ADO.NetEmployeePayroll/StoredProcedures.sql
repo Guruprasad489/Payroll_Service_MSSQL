@@ -80,4 +80,22 @@ select max(Salary) as maxsalary,Gender from employee_payroll group by Gender;
 select min(Salary) as minsalary,Gender from employee_payroll group by Gender; 
 select count(Name) as EmployeeCount,Gender from employee_payroll group by Gender; 
 
+create table Payroll_Details
+(
+SalaryId int identity(1,1) primary key,
+EmpId int FOREIGN KEY REFERENCES employee_payroll(Id),
+Salary float
+);
+
+create procedure spInsertIntoTwoTables
+(
+@Name varchar(100),
+@Address varchar(100),
+@Gender char(1),
+@id int output
+)
+as 
+insert into employee_payroll(Name, Address, Gender) values(@Name, @Address,@Gender);
+set @id = SCOPE_IDENTITY()
+return @id;
 

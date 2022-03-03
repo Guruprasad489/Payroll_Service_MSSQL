@@ -19,7 +19,7 @@ namespace ADO.NetEmployeePayroll
                 try
                 {
                     Console.WriteLine("\nEnter the Program number to get executed \n0.Exit \n1.Get All employees \n2.Add Data to Table \n3.Update Employee \n4.Delete Employee" +
-                                      "\n5.Retrieve employees joined in a particular date range \n6.Find Sum, Average, min, max, count of salary by gender");
+                                      "\n5.Retrieve employees joined in a particular date range \n6.Find Sum, Average, min, max, count of salary by gender \n7.Insert into two tables");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
@@ -82,6 +82,10 @@ namespace ADO.NetEmployeePayroll
                             empRepository.GetAllEmployeesWithDataAdapter(maxquery);
                             empRepository.GetAllEmployeesWithDataAdapter(minquery);
                             empRepository.GetAllEmployeesWithDataAdapter(countquery);
+                            break;
+                        case 7:
+                            EmployeeModel model2 = new EmployeeModel() { Name="AAA", Gender='M', Address="Blr" };
+                            empRepository.InsertIntoTwoTables(model2);
                             break;
                         default:
                             Console.WriteLine("Please Enter Correct option");
