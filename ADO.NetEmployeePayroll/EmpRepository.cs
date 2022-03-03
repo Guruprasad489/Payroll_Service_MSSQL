@@ -84,7 +84,7 @@ namespace ADO.NetEmployeePayroll
             }
         }
 
-        //Method To Add Employee details    
+        //UC7 Method To Add Employee details    
         public void AddEmployee(EmployeeModel obj)
         {
             try
